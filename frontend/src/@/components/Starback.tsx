@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 
-"use client";
-
-import React, { useState, useRef, Suspense } from "react";
+import { useState, useRef, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial } from "@react-three/drei";
 // @ts-ignore
@@ -15,7 +13,7 @@ const StarBackground = (props: any) => {
         random.inSphere(new Float32Array(5000), { radius: 1.2 })
     );
 
-    useFrame((state, delta) => {
+    useFrame((_state, delta) => {
         ref.current.rotation.x -= delta / 10;
         ref.current.rotation.y -= delta / 15;
     })

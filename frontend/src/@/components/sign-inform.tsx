@@ -53,7 +53,6 @@ export default function Signinform() {
             localStorage.setItem(ACCESS_TOKEN, response.data.access);
             localStorage.setItem(REFRESH_TOKEN, response.data.refresh);
             localStorage.setItem(USERNAME, values.username);
-            console.log(response.data)
             form.reset()
             window.location.href = '/'
 

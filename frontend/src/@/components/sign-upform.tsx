@@ -57,7 +57,7 @@ export default function Signupform({ setsubmit }: Props) {
             password: values.password
         }
         try {
-            const response = await api.post("/api/user/register/", data)
+            await api.post("/api/user/register/", data)
             setsubmit(false)
             form.reset()
 
