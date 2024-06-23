@@ -3,8 +3,9 @@ import { ACCESS_TOKEN,REFRESH_TOKEN,USERNAME } from "../@/utils/constants";
 import { TaxData } from '../@/utils/type';
 const url=process.env.API_URL
 console.log(url)
+const apiurl="https://2dd4cf44-c179-4f22-b745-6dc772c05b3b-dev.e1-eu-north-azure.choreoapis.dev/deloittepy/backend/v1.0"
 export const api= axios.create({
-    baseURL:url
+    baseURL:url?url:apiurl
    
 })
 
