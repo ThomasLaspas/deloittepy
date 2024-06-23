@@ -1,10 +1,14 @@
 import axios from 'axios';
 import { ACCESS_TOKEN,REFRESH_TOKEN,USERNAME } from "../@/utils/constants";
 import { TaxData } from '../@/utils/type';
+const url=process.env.API_URL
+console.log(url)
 export const api= axios.create({
-    baseURL:"http://127.0.0.1:8000"
+    baseURL:url
    
 })
+
+
 const token=localStorage.getItem(ACCESS_TOKEN)
 const refresh=localStorage.getItem(REFRESH_TOKEN)
 const name=localStorage.getItem(USERNAME)
