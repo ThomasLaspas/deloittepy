@@ -65,61 +65,64 @@ export default function Signupform({ setsubmit }: Props) {
             toast({
                 variant: "destructive",
                 title: "Uh oh! Something went wrong.",
-                description: err.response?.data?.detail || "Please try again.",
+                description: err.response?.data?.username || "Username already exist",
             });
+            console.log(err)
         } finally {
             setload(false)
         }
     }
     return (
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                <FormField
-                    control={form.control}
-                    name="username"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Username</FormLabel>
-                            <FormControl>
-                                <Input placeholder="Username" {...field} />
-                            </FormControl>
+        <div className="border-2 border-primary rounded-2xl text-center p-5 sm:w-1/4 w-full">
+            <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                    <FormField
+                        control={form.control}
+                        name="username"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Username</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="Username" {...field} />
+                                </FormControl>
 
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="password"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Password</FormLabel>
-                            <FormControl>
-                                <Input placeholder="Password" {...field} type="password" />
-                            </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="password"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Password</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="Password" {...field} type="password" />
+                                </FormControl>
 
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="conf"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Config password</FormLabel>
-                            <FormControl>
-                                <Input placeholder="Config password" type="password" {...field} />
-                            </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="conf"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Config password</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="Config password" type="password" {...field} />
+                                </FormControl>
 
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <Button type="submit">Sign-Up <AiOutlineLoading3Quarters
-                    className={load ? "animate-spin" : "hidden"}
-                /></Button>
-            </form>
-        </Form>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <Button type="submit" className="flex w-full items-center gap-4">Sign-Up <AiOutlineLoading3Quarters
+                        className={load ? "animate-spin" : "hidden"}
+                    /></Button>
+                </form>
+            </Form>
+        </div>
     )
 }

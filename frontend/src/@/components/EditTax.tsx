@@ -214,7 +214,7 @@ function EditTask({ user }: { user: any }) {
                     />
                 </div>
 
-                <Button type="submit" disabled={load}>Submit <AiOutlineLoading3Quarters
+                <Button type="submit" disabled={load} className="flex items-center gap-4">Submit <AiOutlineLoading3Quarters
                     className={load ? "animate-spin" : "hidden"}
                 /></Button>
             </form>

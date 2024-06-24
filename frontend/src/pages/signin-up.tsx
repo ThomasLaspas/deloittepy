@@ -7,7 +7,7 @@ import { Switch } from "../@/components/ui/switch"
 function Signinup() {
 
     const [submit, setsubmit] = useState<boolean>(false)
-    return (<div className="h-full w-full grid place-items-center">
+    return (<div className="h-full w-full grid place-items-center sm:px-0 px-6">
 
         {!submit ? <Signinform /> : <Signupform setsubmit={setsubmit} />}
         <div className="flex items-center space-x-2">
