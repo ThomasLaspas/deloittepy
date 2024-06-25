@@ -1,11 +1,10 @@
 import axios from 'axios';
 import { ACCESS_TOKEN,USERNAME } from "../@/utils/constants";
 import { TaxData,Data } from '../@/utils/type';
-const url=process.env.API_URL
 const token=localStorage.getItem(ACCESS_TOKEN)
 const name=localStorage.getItem(USERNAME)
 export const api= axios.create({
-    baseURL:url
+    baseURL:"https://2dd4cf44-c179-4f22-b745-6dc772c05b3b-dev.e1-eu-north-azure.choreoapis.dev/deloittepy/backend/v1.0"
    
 })
 
