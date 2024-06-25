@@ -21,7 +21,7 @@ import {
     SelectValue,
 } from "./ui/select"
 import { useState } from "react"
-import { updateTax } from "@/apis/axios"
+import { UpdateTax } from "@/apis/axios"
 import { useToast } from "./ui/use-toast"
 import { USERNAME } from "../utils/constants"
 import { AiOutlineLoading3Quarters } from "react-icons/ai"
@@ -75,7 +75,7 @@ function EditTask({ user }: { user: any }) {
 
         }
         try {
-            await updateTax(data);
+            await UpdateTax(data);
             toast({
                 title: "Success",
                 description: "We received your info.",

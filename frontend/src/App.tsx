@@ -29,13 +29,16 @@ function App() {
       setload(false)
     }
   };
-  console.log(user)
+
   if (load) {
     return (
-      <h1>loading...</h1>
+      <section className="w-full h-[80vh] grid place-items-center">
+        <div className="loader"></div>
+      </section>
     )
   }
   if (!isAuthorized) {
+
     return (
       <div className="h-[80vh] grid place-items-center w-full sm:px-[4%] px-[6%] ">
         <div className="flex flex-col gap-5">

@@ -14,10 +14,13 @@ import {
     FormMessage,
 } from "./ui/form"
 import { Input } from "./ui/input"
-import { api } from "@/apis/axios"
 import { REFRESH_TOKEN, ACCESS_TOKEN, USERNAME } from "../utils/constants"
 import { useState } from "react";
 import { toast } from "./ui/use-toast";
+import { Signin } from "@/apis/axios";
+
+
+
 
 const formSchema = z.object({
     username: z.string().min(2, {
@@ -49,9 +52,10 @@ export default function Signinform() {
             password: values.password
         }
         try {
-            const response = await api.post("/api/token/", data)
-            localStorage.setItem(ACCESS_TOKEN, response.data.access);
-            localStorage.setItem(REFRESH_TOKEN, response.data.refresh);
+            const response = await Signin(data)
+            console.log(response)
+            localStorage.setItem(ACCESS_TOKEN, response.access);
+            localStorage.setItem(REFRESH_TOKEN, response.refresh);
             localStorage.setItem(USERNAME, values.username);
             form.reset()
             window.location.href = '/'
@@ -62,7 +66,7 @@ export default function Signinform() {
                 title: "Uh oh! Something went wrong.",
                 description: err.response?.data?.detail || "Please try again.",
             });
-
+            console.log(err)
         } finally {
             setload(false)
         }

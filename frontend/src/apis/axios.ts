@@ -1,17 +1,14 @@
 import axios from 'axios';
-import { ACCESS_TOKEN,REFRESH_TOKEN,USERNAME } from "../@/utils/constants";
-import { TaxData } from '../@/utils/type';
+import { ACCESS_TOKEN,USERNAME } from "../@/utils/constants";
+import { TaxData,Data } from '../@/utils/type';
 const url=process.env.API_URL
-const apiurl="/choreo-apis/deloittepy/backend/v1"
+const token=localStorage.getItem(ACCESS_TOKEN)
+const name=localStorage.getItem(USERNAME)
 export const api= axios.create({
-    baseURL:url?url:apiurl
+    baseURL:url
    
 })
 
-
-const token=localStorage.getItem(ACCESS_TOKEN)
-const refresh=localStorage.getItem(REFRESH_TOKEN)
-const name=localStorage.getItem(USERNAME)
 export const getTax = async () => {
     try {
         const response = await api.get('/api/taxes', {
@@ -29,7 +26,7 @@ export const getTax = async () => {
     }
 };
 
-export const updateTax = async (data: TaxData): Promise<TaxData> => {
+export const UpdateTax = async (data: TaxData)=> {
     try {
         const response = await api.put('/api/taxes', data,{
             headers: {
@@ -43,14 +40,13 @@ export const updateTax = async (data: TaxData): Promise<TaxData> => {
     }
 };
 
-export const aiGenerate=async(username:string)=>{
+export const AiGenerate=async(username:string)=>{
     try{
         const response=await api.post('/api/aiadvice',{username},{
             headers: {
                 Authorization: `Bearer ${token}`
             }
-        });
-    
+        }); 
         return response.data;
     } catch (error) {
         console.error('Error updating tax:', error);
@@ -59,20 +55,24 @@ export const aiGenerate=async(username:string)=>{
     
 }
 
-export const LogoutUser=async()=>{
-    try {
-        await api.post('/api/user/logout/', { refresh_token: refresh},{
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }
-
-        );
-        localStorage.removeItem(REFRESH_TOKEN);
-        localStorage.removeItem(ACCESS_TOKEN);
-        localStorage.removeItem(USERNAME);
-
-      } catch (error) {
-        console.error('Error logging out:', error);
-      }
+export const Createuser=async(data:Data)=>{
+    try{
+        await api.post("/api/user/register/", data)
+    }
+    catch (error) {
+        console.error('Error updating tax:', error);
+        throw error;
+    }
 }
+
+export const Signin=async(data:Data)=>{
+    try{
+        const response = await api.post("/api/token/", data)
+        return response.data;
+    }catch (error) {
+        console.error('Error updating tax:', error);
+        throw error;
+    }
+}
+
+

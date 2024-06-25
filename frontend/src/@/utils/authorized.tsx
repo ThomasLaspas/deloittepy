@@ -18,10 +18,23 @@ function IsAuth() {
                 refresh: refreshToken,
             });
             if (res.status === 200) {
-                localStorage.setItem(ACCESS_TOKEN, res.data.access)
-                setIsAuthorized(true)
+                const decoded = jwtDecode(refreshToken!);
+                const tokenExpiration = decoded.exp;
+                const now = Date.now() / 1000;
+                console.log(tokenExpiration)
+                if (tokenExpiration! < now) {
+                    localStorage.clear()
+                    setIsAuthorized(false)
+                    return
+                } else {
+                    localStorage.setItem(ACCESS_TOKEN, res.data.access)
+                    setIsAuthorized(true)
+                    return tokenExpiration
+                }
+
             } else {
                 setIsAuthorized(false)
+                localStorage.clear()
             }
         } catch (error) {
             console.log(error);

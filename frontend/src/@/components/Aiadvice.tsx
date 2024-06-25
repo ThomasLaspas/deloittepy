@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { Button } from './ui/button'
 import { useToast } from './ui/use-toast'
-import { aiGenerate } from '../../apis/axios'
+import { AiGenerate } from '../../apis/axios'
 import { TextGenerateEffect } from './ui/text-generate-effect'
 import { USERNAME } from '../utils/constants'
 
@@ -15,7 +15,7 @@ function Aiadvice() {
     const aitax = async () => {
         setload(true)
         try {
-            const generatedAdvice = await aiGenerate(username!);
+            const generatedAdvice = await AiGenerate(username!);
             setAdvice(generatedAdvice.advice);
         } catch (error: any) {
             toast({

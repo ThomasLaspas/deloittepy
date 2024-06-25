@@ -14,9 +14,9 @@ import {
     FormMessage,
 } from "./ui/form"
 import { Input } from "./ui/input"
-import { api } from "@/apis/axios"
 import { AiOutlineLoading3Quarters } from "react-icons/ai"
 import { useState } from "react"
+import { Createuser } from "@/apis/axios"
 import { toast } from "./ui/use-toast"
 
 
@@ -57,7 +57,7 @@ export default function Signupform({ setsubmit }: Props) {
             password: values.password
         }
         try {
-            await api.post("/api/user/register/", data)
+            await Createuser(data)
             setsubmit(false)
             form.reset()
 
@@ -65,9 +65,9 @@ export default function Signupform({ setsubmit }: Props) {
             toast({
                 variant: "destructive",
                 title: "Uh oh! Something went wrong.",
-                description: err.response?.data?.username || "Username already exist",
+                description: err.response?.data?.username || "Try again",
             });
-            console.log(err)
+
         } finally {
             setload(false)
         }

@@ -23,7 +23,7 @@ import {
     SelectValue,
 } from "./ui/select"
 import { useState } from "react"
-import { updateTax } from "../../apis/axios"
+import { UpdateTax } from "../../apis/axios"
 import { useToast } from "./ui/use-toast"
 import { USERNAME } from "../utils/constants"
 import { AiOutlineLoading3Quarters } from "react-icons/ai"
@@ -76,23 +76,25 @@ function CreateForm() {
 
         }
         try {
-            await updateTax(data);
+            await UpdateTax(data);
             toast({
                 title: "Success",
                 description: "We received your info.",
             });
+            window.location.reload()
         } catch (error: any) {
             toast({
                 variant: "destructive",
                 title: "Uh oh! Something went wrong.",
                 description: error.response?.data?.detail || "Please try again.",
             });
+            console.log(error)
         } finally {
             setload(false)
+            form.reset()
         }
 
-        form.reset()
-        window.location.reload()
+
     }
 
     return (
@@ -216,7 +218,7 @@ function CreateForm() {
                     />
                 </div>
 
-                <Button type="submit" disabled={load}>Submit <AiOutlineLoading3Quarters
+                <Button type="submit" disabled={load} className="flex items-center gap-4">Submit <AiOutlineLoading3Quarters
                     className={load ? "animate-spin" : "hidden"}
                 /></Button>
             </form>

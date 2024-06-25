@@ -15,3 +15,8 @@ export interface RouteError {
     status: number;
     statusText: string;
   }
+
+  export interface Data{
+    username: string,
+    password: string
+  }
